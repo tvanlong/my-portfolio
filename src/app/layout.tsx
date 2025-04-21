@@ -14,7 +14,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Long Van | Web Developer',
-  description: 'Portfolio of Long Van - Building modern web applications with React, Next.js, and Node.js.'
+  description: 'Portfolio of Long Van',
+  icons: {
+    icon: '/logo.svg'
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
