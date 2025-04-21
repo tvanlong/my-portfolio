@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Teal/Emerald Theme */
+    --background: 180 20% 99%;
+    --foreground: 170 35% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 170 35% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 170 35% 15%;
+    --primary: 175 84% 32%; /* Teal */
+    --primary-foreground: 170 10% 98%;
+    --secondary: 160 50% 94%;
+    --secondary-foreground: 170 35% 15%;
+    --muted: 160 20% 96%;
+    --muted-foreground: 170 15% 40%;
+    --accent: 142 71% 45%; /* Emerald accent */
+    --accent-foreground: 170 35% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 170 20% 90%;
+    --input: 170 20% 90%;
+    --ring: 175 84% 32%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 170 35% 8%;
+    --foreground: 170 10% 98%;
+    --card: 170 35% 10%;
+    --card-foreground: 170 10% 98%;
+    --popover: 170 35% 10%;
+    --popover-foreground: 170 10% 98%;
+    --primary: 175 84% 32%;
+    --primary-foreground: 170 10% 98%;
+    --secondary: 160 40% 20%;
+    --secondary-foreground: 170 10% 98%;
+    --muted: 170 30% 15%;
+    --muted-foreground: 170 10% 70%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 170 10% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 170 10% 98%;
+    --border: 170 30% 20%;
+    --input: 170 30% 20%;
+    --ring: 175 84% 32%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Ensures anchor links account for fixed header */
+}
+
+/* Improved focus styles for better accessibility */
+:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/50;
+}
+
+/* Smooth transitions for all interactive elements */
+a,
+button,
+input,
+textarea,
+select {
+  @apply transition-all duration-200;
+}
+
+/* Custom utility classes */
+.gradient-text {
+  @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1;
+}
+
+.icon-container {
+  @apply flex items-center justify-center h-10 w-10 rounded-full bg-primary/10 text-primary;
+}
