@@ -130,19 +130,6 @@ export function AboutSection() {
                       <div className='relative border-l-2 border-muted pl-6 space-y-10'>
                         <TimelineItem
                           icon={<GraduationCap className='h-5 w-5' />}
-                          date='2024 - Now'
-                          title='Hanoi University of Civil Engineering'
-                          subtitle='Information Technology'
-                          description='Specialized in software engineering and data structures.'
-                          details={[
-                            'Data Structures & Algorithms',
-                            'Web Development',
-                            'Database Systems',
-                            'Software Engineering'
-                          ]}
-                        />
-                        <TimelineItem
-                          icon={<GraduationCap className='h-5 w-5' />}
                           date='2021 - 2024'
                           title='BKACAD Academy of Technology'
                           subtitle='Information Technology'
