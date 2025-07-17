@@ -15,7 +15,7 @@ export function Footer() {
         </div>
         <div className='flex items-center gap-4'>
           <p className='text-sm text-muted-foreground hidden md:block'>
-            Made with <Heart className='h-3 w-3 inline text-primary' /> using Next.js & Tailwind
+            Crafted with <Heart className='h-3 w-3 inline text-primary' /> by Long Van using Next.js & Tailwind CSS
           </p>
           <div className='flex gap-4'>
             <Link

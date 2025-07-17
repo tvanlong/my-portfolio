@@ -62,9 +62,10 @@ export function HeroSection() {
               <h1 className='text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none'>
                 Hi, I&apos;m <span className='gradient-text'>Long Van</span>
               </h1>
-              <p className='max-w-[600px] text-muted-foreground md:text-xl text-justify'>
-                A recent graduate with a passion for technology and innovation. I build modern, responsive web
-                applications with cutting-edge technologies.
+              <p className='max-w-[600px] text-muted-foreground md:text-xl'>
+                A recent Information Technology graduate with a strong passion for technology and innovation. I focus on
+                building modern, responsive web applications with attention to performance, accessibility, and user
+                experience.
               </p>
             </div>
             <div className='flex flex-col gap-3 min-[400px]:flex-row'>

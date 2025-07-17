@@ -73,7 +73,7 @@ export function SkillsSection() {
       skills: [{ name: 'JavaScript' }, { name: 'TypeScript' }, { name: 'Java' }, { name: 'PHP' }, { name: 'C#' }]
     },
     {
-      name: 'DevOps',
+      name: 'Tools',
       icon: <GitBranch className='h-4 w-4' />,
       skills: [{ name: 'Git' }, { name: 'GitHub' }, { name: 'Vercel' }, { name: 'Netlify' }]
     },
@@ -100,7 +100,7 @@ export function SkillsSection() {
     {
       name: 'Security',
       icon: <Shield className='h-4 w-4' />,
-      skills: [{ name: 'Authentication' }, { name: 'Authorization' }, { name: 'Data Encryption' }]
+      skills: [{ name: 'Authentication' }, { name: 'Authorization' }]
     },
     {
       name: 'SEO',
@@ -110,7 +110,7 @@ export function SkillsSection() {
     {
       name: 'Other',
       icon: <Sparkles className='h-4 w-4' />,
-      skills: [{ name: '...' }]
+      skills: [{ name: 'English – Target TOEIC 700+' }]
     }
   ]
 

@@ -3,8 +3,7 @@
 import type React from 'react'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { GraduationCap, Briefcase, ChevronDown, FileText, Download, User } from 'lucide-react'
+import { GraduationCap, Briefcase, FileText, Download, User } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -81,21 +80,23 @@ export function AboutSection() {
                   <CardContent className='p-6 space-y-4'>
                     <div className='grid md:grid-cols-[1fr_250px] gap-6'>
                       <div className='space-y-4'>
-                        <h3 className='text-2xl font-bold'>My Story</h3>
-                        <p className='text-muted-foreground text-justify'>
-                          I&apos;m a passionate software developer with a strong foundation in computer science and a
-                          keen interest in creating intuitive, user-friendly applications. My journey in technology
-                          began when I was 20, tinkering with HTML and CSS to build simple websites.
+                        <h3 className='text-2xl font-bold'>About Me</h3>
+                        <p className='text-muted-foreground'>
+                          I’m a dedicated software developer with a solid foundation in computer science and a passion
+                          for building clean, user-friendly web applications. My journey began at 20, experimenting with
+                          HTML and CSS to create simple web pages—and I’ve been hooked ever since.
                         </p>
-                        <p className='text-muted-foreground text-justify'>
-                          Throughout my academic career, I&apos;ve focused on developing a versatile skill set that
-                          allows me to work across the full stack. I believe in writing clean, maintainable code and
-                          staying current with emerging technologies and best practices.
+                        <p className='text-muted-foreground'>
+                          During my academic years, I cultivated a full-stack mindset, gaining hands-on experience with
+                          both frontend and backend technologies. I value writing clean, maintainable code and
+                          constantly stay updated with modern tools, frameworks, and best practices.
                         </p>
-                        <p className='text-muted-foreground text-justify'>
-                          My goal is to leverage technology to solve real-world problems and create meaningful
-                          experiences. I&apos;m particularly interested in web development.
+                        <p className='text-muted-foreground'>
+                          I’m driven by a desire to solve real-world problems through technology and create meaningful
+                          digital experiences. My primary focus lies in web development, where I continue to grow and
+                          contribute with purpose.
                         </p>
+
                         <div className='pt-4'>
                           <Button className='gap-2' onClick={handleDownload}>
                             <FileText className='h-4 w-4' />
@@ -168,10 +169,23 @@ export function AboutSection() {
                           date='Feb. 2024 - Apr. 2024'
                           title='Software Engineering Intern'
                           subtitle='Eastern Sun Vietnam JSC'
-                          description='Exploring React.js and .NET technologies to support project development.'
+                          description='Explored React.js and ASP.NET technologies to support full-stack project development.'
                           details={[
-                            'Developed responsive UI components using React',
-                            'Integrated RESTful APIs with the front-end'
+                            'Built responsive and reusable UI components with React.js, ensuring cross-device compatibility.',
+                            'Integrated RESTful APIs into the frontend to enable seamless data communication and dynamic rendering.'
+                          ]}
+                        />
+                        <TimelineItem
+                          icon={<Briefcase className='h-5 w-5' />}
+                          date='May. 2025 - Jul. 2025'
+                          title='Frontend Developer Intern'
+                          subtitle='Simax Technology and Solutions JSC'
+                          description='Contributing to a public information portal using Next.js.'
+                          details={[
+                            'Developed a public information portal using Next.js to enhance accessibility and performance.',
+                            'Migrated rendering logic from client-side to server-side, improving SEO and reducing initial load time.',
+                            'Integrated Directus (Headless CMS) to enable efficient, non-technical content management.',
+                            'Technologies: Next.js, TypeScript, PostgreSQL, Directus.'
                           ]}
                         />
                       </div>
@@ -232,8 +246,6 @@ function TimelineItem({
   description: string
   details: string[]
 }) {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
     <div className='relative'>
       <div className='absolute -left-[42px] flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground'>
@@ -243,39 +255,16 @@ function TimelineItem({
         <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-2'>
           <div>
             <h4 className='text-lg font-semibold'>{title}</h4>
-            <p className='text-sm text-muted-foreground'>{subtitle}</p>
+            <p className='text-sm text-muted-foreground italic'>{subtitle}</p>
           </div>
           <div className='px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium'>{date}</div>
         </div>
         <p className='text-muted-foreground'>{description}</p>
-        <div>
-          <Button
-            variant='ghost'
-            size='sm'
-            className='flex items-center gap-1 p-0 h-auto'
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <span className='text-sm font-medium'>{isOpen ? 'Hide details' : 'Show details'}</span>
-            <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-              <ChevronDown className='h-4 w-4' />
-            </motion.div>
-          </Button>
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{
-              height: isOpen ? 'auto' : 0,
-              opacity: isOpen ? 1 : 0
-            }}
-            transition={{ duration: 0.3 }}
-            className='overflow-hidden'
-          >
-            <ul className='mt-2 space-y-1 list-disc list-inside text-sm text-muted-foreground'>
-              {details.map((detail, index) => (
-                <li key={index}>{detail}</li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
+        <ul className='mt-2 space-y-1 list-disc list-inside text-sm text-muted-foreground'>
+          {details.map((detail, index) => (
+            <li key={index}>{detail}</li>
+          ))}
+        </ul>
       </div>
     </div>
   )
@@ -285,7 +274,7 @@ function InterestCard({ title, description }: { title: string; description: stri
   return (
     <div className='p-4 rounded-lg border bg-card hover:bg-accent/10 transition-colors duration-200'>
       <h4 className='font-semibold mb-2'>{title}</h4>
-      <p className='text-sm text-muted-foreground text-justify'>{description}</p>
+      <p className='text-sm text-muted-foreground'>{description}</p>
     </div>
   )
 }
