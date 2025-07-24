@@ -134,7 +134,7 @@ export function AboutSection() {
                           date='2021 - 2024'
                           title='BKACAD Academy of Technology'
                           subtitle='Information Technology'
-                          description='Graduated with honors (GPA: 3.0/4.0). Specialized in software engineering and data structures.'
+                          description='Specialized in software engineering and data structures.'
                           details={[
                             'Data Structures & Algorithms',
                             'Web Development',
@@ -177,8 +177,8 @@ export function AboutSection() {
                         />
                         <TimelineItem
                           icon={<Briefcase className='h-5 w-5' />}
-                          date='May. 2025 - Jul. 2025'
-                          title='Frontend Developer Intern'
+                          date='Apr. 2025 - Jul. 2025'
+                          title='Frontend Developer'
                           subtitle='Simax Technology and Solutions JSC'
                           description='Contributing to a public information portal using Next.js.'
                           details={[
