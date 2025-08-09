@@ -3,7 +3,7 @@
 import type React from 'react'
 
 import { useState } from 'react'
-import { GraduationCap, Briefcase, FileText, Download, User } from 'lucide-react'
+import { GraduationCap, Briefcase, Download, User } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -99,7 +99,6 @@ export function AboutSection() {
 
                         <div className='pt-4'>
                           <Button className='gap-2' onClick={handleDownload}>
-                            <FileText className='h-4 w-4' />
                             <Download className='h-4 w-4' />
                             Download Resume
                           </Button>
