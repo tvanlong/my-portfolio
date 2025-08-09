@@ -5,6 +5,7 @@ import { ArrowRight, Github, Linkedin, Mail, Sparkles, ExternalLink, Rocket, Zap
 import { motion } from 'framer-motion'
 
 import { Button } from '@/components/ui/button'
+import { BackgroundLines } from '@/components/ui/background-lines'
 import Image from 'next/image'
 
 export function HeroSection() {
@@ -37,7 +38,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className='w-full py-12 md:py-24 lg:py-32 relative overflow-hidden'>
+    <BackgroundLines className='w-full py-12 md:py-24 lg:py-32 relative overflow-hidden'>
       {/* Background elements */}
       <div className='absolute top-20 right-10 opacity-10'>
         <Sparkles className='h-24 w-24 text-primary animate-pulse-soft' />
@@ -135,6 +136,6 @@ export function HeroSection() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </BackgroundLines>
   )
 }
