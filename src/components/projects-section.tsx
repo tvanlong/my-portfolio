@@ -33,7 +33,7 @@ export function ProjectsSection() {
         'https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/2024_1_30_638422322140399932_cac-dong-laptop-dell-avt.jpg',
       tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
       stats: { stars: 1, forks: 0, views: 1 },
-      links: { demo: 'https://laptop-kt-store.vercel.app', code: 'https://github.com/tvanlong/laptop-store' }
+      links: { demo: 'https://laptop-ease.vercel.app', code: 'https://github.com/tvanlong/laptop-ease-web' }
     },
     {
       title: 'Personal Finance Tracker',
