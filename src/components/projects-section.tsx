@@ -139,7 +139,7 @@ export function ProjectsSection() {
   )
 
   return (
-    <section id='projects' className='w-full py-12 md:py-24 lg:py-32 bg-muted/40'>
+    <section id='projects' className='w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-background to-muted/40'>
       <div className='container px-4 md:px-6'>
         <FadeIn>
           <div className='flex flex-col items-center justify-center space-y-4 text-center mb-12'>

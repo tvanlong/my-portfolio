@@ -127,8 +127,10 @@ export function ContactSection() {
   ]
 
   return (
-    <section id='contact' className='w-full py-12 md:py-24 lg:py-32 bg-muted/40 relative'>
-      {/* Background decorative elements */}
+    <section
+      id='contact'
+      className='w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-background to-muted/40 relative'
+    >
       <div className='absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none'>
         <div className='absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl'></div>
         <div className='absolute -bottom-20 -left-20 w-60 h-60 bg-accent/5 rounded-full blur-3xl'></div>

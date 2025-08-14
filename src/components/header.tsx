@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-
 import { useState, useEffect } from 'react'
 import { Download, Menu, X, Home, User, Code2, Briefcase, Mail } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,17 +8,18 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/logo'
 
+const sections = [
+  { id: 'about', label: 'About', icon: User },
+  { id: 'skills', label: 'Skills', icon: Code2 },
+  { id: 'projects', label: 'Projects', icon: Briefcase },
+  { id: 'contact', label: 'Contact', icon: Mail }
+]
+
 export function Header() {
   const [activeSection, setActiveSection] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-
-  const sections = [
-    { id: 'about', label: 'About', icon: <User className='h-4 w-4 mr-1' /> },
-    { id: 'skills', label: 'Skills', icon: <Code2 className='h-4 w-4 mr-1' /> },
-    { id: 'projects', label: 'Projects', icon: <Briefcase className='h-4 w-4 mr-1' /> },
-    { id: 'contact', label: 'Contact', icon: <Mail className='h-4 w-4 mr-1' /> }
-  ]
+  const [isDownloading, setIsDownloading] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +49,30 @@ export function Header() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [sections])
+  }, [])
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isMenuOpen])
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
 
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false)
@@ -84,119 +107,233 @@ export function Header() {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const handleDownload = () => {
-    const link = document.createElement('a')
-    link.href = '/resume.pdf'
-    link.download = 'resume.pdf'
-    link.target = '_blank'
-    link.rel = 'noopener noreferrer'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  const handleDownload = async () => {
+    setIsDownloading(true)
+
+    try {
+      const link = document.createElement('a')
+      link.href = '/resume.pdf'
+      link.download = 'resume.pdf'
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    } catch (error) {
+      console.error('Download failed:', error)
+    } finally {
+      setTimeout(() => setIsDownloading(false), 1000)
+    }
   }
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-md shadow-sm' : 'bg-background'
-      }`}
-    >
-      <div className='container flex h-16 items-center justify-between'>
-        <div className='flex items-center gap-6'>
-          <Logo />
-          <nav className='hidden md:flex items-center space-x-1'>
+    <>
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          isScrolled ? 'bg-background/80 backdrop-blur-lg shadow-sm border-b border-border/40' : 'bg-background'
+        }`}
+      >
+        <div className='container flex h-16 items-center justify-between'>
+          <div className='flex items-center gap-6'>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Logo />
+            </motion.div>
+
+            <nav className='hidden md:flex items-center space-x-1'>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  variant='ghost'
+                  className={`relative px-4 py-2 transition-colors ${
+                    activeSection === '' ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                  onClick={scrollToTop}
+                >
+                  <Home className='h-4 w-4 mr-1.5' />
+                  Home
+                  {activeSection === '' && (
+                    <motion.div
+                      layoutId='activeSection'
+                      className='absolute bottom-0 left-2 right-2 h-0.5 bg-primary rounded-full'
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  )}
+                </Button>
+              </motion.div>
+
+              {sections.map((section) => {
+                const Icon = section.icon
+                return (
+                  <motion.div key={section.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button
+                      variant='ghost'
+                      className={`relative px-4 py-2 transition-colors ${
+                        activeSection === section.id
+                          ? 'text-primary font-medium'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                      onClick={() => scrollToSection(section.id)}
+                    >
+                      <Icon className='h-4 w-4 mr-1.5' />
+                      {section.label}
+                      {activeSection === section.id && (
+                        <motion.div
+                          layoutId='activeSection'
+                          className='absolute bottom-0 left-2 right-2 h-0.5 bg-primary rounded-full'
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.2 }}
+                        />
+                      )}
+                    </Button>
+                  </motion.div>
+                )
+              })}
+            </nav>
+          </div>
+
+          <div className='flex items-center gap-4'>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant='outline'
+                size='sm'
+                className='hidden md:flex gap-2 transition-all hover:shadow-md'
+                onClick={handleDownload}
+                disabled={isDownloading}
+              >
+                <Download className={`h-4 w-4 ${isDownloading ? 'animate-bounce' : ''}`} />
+                {isDownloading ? 'Downloading...' : 'Resume'}
+              </Button>
+            </motion.div>
+
             <Button
               variant='ghost'
-              className={`relative px-4 py-2 ${activeSection === '' ? 'text-primary' : 'text-muted-foreground'}`}
-              onClick={scrollToTop}
+              size='icon'
+              className='md:hidden relative'
+              onClick={toggleMenu}
+              aria-label='Toggle menu'
+              aria-expanded={isMenuOpen}
             >
-              <Home className='h-4 w-4 mr-1' />
-              Home
-              {activeSection === '' && (
-                <motion.div
-                  layoutId='activeSection'
-                  className='absolute bottom-0 left-0 right-0 h-0.5 bg-primary'
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-              )}
-            </Button>
-            {sections.map((section) => (
-              <Button
-                key={section.id}
-                variant='ghost'
-                className={`relative px-4 py-2 ${
-                  activeSection === section.id ? 'text-primary' : 'text-muted-foreground'
-                }`}
-                onClick={() => scrollToSection(section.id)}
-              >
-                {section.icon}
-                {section.label}
-                {activeSection === section.id && (
+              <AnimatePresence mode='wait'>
+                {isMenuOpen ? (
                   <motion.div
-                    layoutId='activeSection'
-                    className='absolute bottom-0 left-0 right-0 h-0.5 bg-primary'
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    key='close'
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                  />
+                  >
+                    <X className='h-5 w-5' />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key='menu'
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className='h-5 w-5' />
+                  </motion.div>
                 )}
-              </Button>
-            ))}
-          </nav>
+              </AnimatePresence>
+            </Button>
+          </div>
         </div>
 
-        <div className='flex items-center gap-4'>
-          <Button variant='outline' size='sm' className='hidden md:flex gap-2' onClick={handleDownload}>
-            <Download className='h-4 w-4' />
-            Resume
-          </Button>
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2, ease: 'easeInOut' }}
+              className='md:hidden overflow-hidden bg-background/95 backdrop-blur-lg border-b'
+            >
+              <motion.div
+                className='container py-4 flex flex-col space-y-2'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1 }}>
+                  <Button
+                    variant='ghost'
+                    className={`justify-start w-full text-left transition-colors ${
+                      activeSection === ''
+                        ? 'text-primary bg-primary/10 font-medium'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                    }`}
+                    onClick={scrollToTop}
+                  >
+                    <Home className='h-5 w-5 mr-3' />
+                    Home
+                  </Button>
+                </motion.div>
 
-          <Button variant='ghost' size='icon' className='md:hidden' onClick={toggleMenu} aria-label='Toggle menu'>
-            {isMenuOpen ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
-          </Button>
-        </div>
-      </div>
+                {sections.map((section, index) => {
+                  const Icon = section.icon
+                  return (
+                    <motion.div
+                      key={section.id}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.1 + (index + 1) * 0.05 }}
+                    >
+                      <Button
+                        variant='ghost'
+                        className={`justify-start w-full text-left transition-colors ${
+                          activeSection === section.id
+                            ? 'text-primary bg-primary/10 font-medium'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                        }`}
+                        onClick={() => scrollToSection(section.id)}
+                      >
+                        <Icon className='h-5 w-5 mr-3' />
+                        {section.label}
+                      </Button>
+                    </motion.div>
+                  )
+                })}
 
-      {/* Mobile menu */}
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className='pt-2'
+                >
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    className='gap-2 w-full transition-all hover:shadow-md'
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                  >
+                    <Download className={`h-4 w-4 ${isDownloading ? 'animate-bounce' : ''}`} />
+                    {isDownloading ? 'Downloading...' : 'Download Resume'}
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+
+      {/* Mobile menu overlay */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className='md:hidden overflow-hidden bg-background border-b'
-          >
-            <div className='container py-4 flex flex-col space-y-4'>
-              <Button
-                variant='ghost'
-                className={`justify-start ${activeSection === '' ? 'text-primary' : 'text-muted-foreground'}`}
-                onClick={scrollToTop}
-              >
-                <Home className='h-5 w-5 mr-2' />
-                Home
-              </Button>
-              {sections.map((section) => (
-                <Button
-                  key={section.id}
-                  variant='ghost'
-                  className={`justify-start ${activeSection === section.id ? 'text-primary' : 'text-muted-foreground'}`}
-                  onClick={() => scrollToSection(section.id)}
-                >
-                  {React.cloneElement(section.icon, { className: 'h-5 w-5 mr-2' })}
-                  {section.label}
-                </Button>
-              ))}
-              <Button variant='outline' size='sm' className='gap-2 w-full sm:w-auto' onClick={handleDownload}>
-                <Download className='h-4 w-4' />
-                Download Resume
-              </Button>
-            </div>
-          </motion.div>
+            className='fixed inset-0 bg-black/20 z-40 md:hidden'
+            onClick={() => setIsMenuOpen(false)}
+          />
         )}
       </AnimatePresence>
-    </header>
+    </>
   )
 }
