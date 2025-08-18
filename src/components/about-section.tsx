@@ -240,19 +240,6 @@ export function AboutSection() {
                                 ]}
                                 color='primary'
                               />
-                              <TimelineItem
-                                icon={<Briefcase className='h-5 w-5' />}
-                                date='Feb. 2024 - Apr. 2024'
-                                title='Software Engineering Intern'
-                                subtitle='Eastern Sun Vietnam JSC'
-                                location='On-site'
-                                description='Explored React.js and ASP.NET technologies to support full-stack project development.'
-                                details={[
-                                  'Built responsive and reusable UI components with React.js, ensuring cross-device compatibility.',
-                                  'Integrated RESTful APIs into the frontend to enable seamless data communication and dynamic rendering.'
-                                ]}
-                                color='accent'
-                              />
                             </div>
                           </div>
                         </div>
