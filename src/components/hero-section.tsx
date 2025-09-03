@@ -247,7 +247,7 @@ export function HeroSection() {
                   <div className='absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse' />
                 )}
                 <Image
-                  src='https://res.cloudinary.com/dhyxap32r/image/upload/v1745126671/snapedit_1745126640322_yew1jr.png'
+                  src='/avatar.jpg'
                   alt='Long Van - Profile Picture'
                   fill
                   sizes='(max-width: 640px) 256px, (max-width: 1024px) 320px, (max-width: 1280px) 384px, 448px'
