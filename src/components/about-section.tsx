@@ -182,7 +182,7 @@ export function AboutSection() {
                             <div className='space-y-8 sm:space-y-10'>
                               <TimelineItem
                                 icon={<GraduationCap className='h-5 w-5' />}
-                                date='2021 - 2024'
+                                date='2022 - 2025'
                                 title='BKACAD Academy of Technology'
                                 subtitle='Information Technology'
                                 location='Vietnam'
@@ -194,16 +194,6 @@ export function AboutSection() {
                                   'Software Engineering'
                                 ]}
                                 color='primary'
-                              />
-                              <TimelineItem
-                                icon={<GraduationCap className='h-5 w-5' />}
-                                date='2018 - 2021'
-                                title='Ly Thuong Kiet High School'
-                                subtitle='High School Diploma'
-                                location='Vietnam'
-                                description='Graduated with honors.'
-                                details={['Mathematics', 'Physics', 'Computer Science']}
-                                color='accent'
                               />
                             </div>
                           </div>
