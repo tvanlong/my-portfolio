@@ -182,7 +182,7 @@ export function AboutSection() {
                             <div className='space-y-8 sm:space-y-10'>
                               <TimelineItem
                                 icon={<GraduationCap className='h-5 w-5' />}
-                                date='2022 - 2025'
+                                date='10/2021 - 12/2024'
                                 title='BKACAD Academy of Technology'
                                 subtitle='Information Technology'
                                 location='Vietnam'
